@@ -1,6 +1,6 @@
 #Import time module
 import time
-
+import timeit
 Pi = 3.14159
 
 #Record start time
@@ -17,14 +17,12 @@ def iterativePower(base, exponent) :
             x + 1 
     return retVal
 
-iterativePower(Pi, 13)
-
-#Record end time
-end = time.time()
-
-print(start * 10**9)
-print(end * 10**9)
+t0 = time.clock()
+iterativePower(Pi, 100)
+#print("Hello")
+t1 = time.clock()
+print("Time elapsed: ", t1 - t0)
 
 #Print differince between start and end time in nano secs.
-print("The time of execution of above program is: ",
-     (end-start) * 10**100, "ns")
+#print("The time of execution of above program is: ",
+     #(end-start) * 10**100, "ns")

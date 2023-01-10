@@ -22,28 +22,13 @@ def recursivePower(base, exponent) :
     else :
         return base * recursivePower(base, exponent - 1)
 
-x = iterativePower(Pi, 5)
-y = recursivePower(Pi, 5)
+iterativestart = time.clock()
+iterativePower(Pi, 100)
+iterativeend = time.clock()
+print("The iterative function took: ", (iterativeend-iterativestart) * 10**-9, "ns")
 
-print(x, y)
-
-#Record start time
-start = time.time()
-
-iterativePower(Pi, 13)
-
-#Record end time
-end = time.time()
-
-print("The time it took for the iterative function was:", (end-start) * 10**9, "ns")
-
-#Record start time
-start = time.time()
-
-recursivePower(Pi, 13)
-
-#Record end time
-end = time.time()
-
-print("The time it took for the recursive function was:", (end-start) * 10**9, "ns")
+recursivestart = time.clock()
+recursivePower(Pi, 100)
+recursiveend = time.clock()
+print("The recursive function took: ", (recursiveend-recursivestart) * 10**-9, "ns")
 
