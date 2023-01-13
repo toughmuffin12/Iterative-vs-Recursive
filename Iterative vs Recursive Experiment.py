@@ -1,6 +1,8 @@
+#Import modules
 import time
+import pandas as pd
 
-Pi = 3.14159
+base = 3.14159265359
 
 #Iterative Power Implementation
 def iterativePower(base, exponent) :
@@ -22,13 +24,43 @@ def recursivePower(base, exponent) :
     else :
         return base * recursivePower(base, exponent - 1)
 
-iterativestart = time.clock()
-iterativePower(Pi, 100)
-iterativeend = time.clock()
-print("The iterative function took: ", (iterativeend-iterativestart) * 10**-9, "ns")
+#Declration of lists
+n = []
+iterativeresultslist = []
+recursiveresultslist = []
 
-recursivestart = time.clock()
-recursivePower(Pi, 100)
-recursiveend = time.clock()
-print("The recursive function took: ", (recursiveend-recursivestart) * 10**-9, "ns")
+for x in range(-1, 997):
+    #Get current processor time for iteration function
+    it0 = time.time()
+
+    iterativePower(base, x)
+
+    #Get current processor time for iteration function
+    it1 = time.time()
+
+    iterativeresultslist.append("{:.2f}".format((it1-it0) * 10**9))
+
+    #Get current processor time for recursive function
+    rt0 = time.time()
+
+    recursivePower(base, x)
+
+    #Get current processor time for recursive function
+    rt1 = time.time()
+
+    recursiveresultslist.append("{:.2f}".format((rt1-rt0) * 10**9))
+
+    n.append(x)
+    x + 1
+
+#Naming the columns 
+col1 = "n"
+col2 = "iterative-time (ns)"
+col3 = "recursive-time (ns)"
+
+
+
+#Creating the data frames and 
+data = pd.DataFrame({col1:n, col2:iterativeresultslist, col3:recursiveresultslist})
+data.to_excel('Iterative_vs_Recursive_results.xlsx', sheet_name='sheet1', index=False)
 

@@ -1,10 +1,7 @@
-#Import time module
+#Import modules
 import time
-import timeit
-Pi = 3.14159
 
-#Record start time
-start = time.time()
+base = 3.14159265359
 
 #Iterative Power Implementation
 def iterativePower(base, exponent) :
@@ -17,12 +14,32 @@ def iterativePower(base, exponent) :
             x + 1 
     return retVal
 
-t0 = time.clock()
-iterativePower(Pi, 100)
-#print("Hello")
-t1 = time.clock()
-print("Time elapsed: ", t1 - t0)
+#Recusive Power Implemetation
+def recursivePower(base, exponent) :
+    if exponent < 0 :
+        return 1.0 / recursivePower(base, -exponent)
+    elif exponent == 0 :
+        return 1.0
+    else :
+        return base * recursivePower(base, exponent - 1)
 
-#Print differince between start and end time in nano secs.
-#print("The time of execution of above program is: ",
-     #(end-start) * 10**100, "ns")
+#Get current processor time for recursive function
+rt0 = time.time()
+
+recursivePower(base, 2)
+
+#Get current processor time for recursive function
+rt1 = time.time()
+
+print("Recursive function with exponet 2:", "{:.2f}".format((rt1-rt0) * 10**9), "ns")
+
+#Get current processor time for recursive function
+it0 = time.time()
+
+iterativePower(base, 3)
+
+#Get current processor time for recursive function
+it1 = time.time()
+
+print("Iterative function with exponet 3:", "{:.2f}".format((it1-it0) * 10**9), "ns")
+
